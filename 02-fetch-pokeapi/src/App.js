@@ -6,20 +6,27 @@ Hint: Don't forget the dependency array!
 */
 
 import "./styles.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function App() {
   const [pokemon, setPokemon] = useState([]);
+  const [page, setPage] = useState("https://pokeapi.co/api/v2/pokemon");
+
+  useEffect(() => {
+    loadPokemon();
+  }, []);
 
   async function loadPokemon() {
     try {
-      const response = await fetch("https://pokeapi.co/api/v2/pokemon");
+      const response = await fetch(page);
       const data = await response.json();
       setPokemon(data.results);
+      setPage(data.next);
     } catch (error) {
       console.log(error);
     }
   }
+
 
   return (
     <main className="App">

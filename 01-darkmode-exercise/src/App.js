@@ -5,6 +5,11 @@ import Toggle from './components/Toggle'
 export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(true)
 
+  useEffect(() => {
+    console.log("Dark Mode");
+  }, [isDarkMode]);
+
+
   return (
     <main className={isDarkMode ? 'dark' : 'light'}>
       <h1>You should use Dark Mode</h1>
